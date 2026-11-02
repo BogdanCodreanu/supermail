@@ -1,0 +1,10 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./shared" },
+    { "path": "./server" },
+    { "path": "./server/test" },
+    { "path": "./web" },
+    { "path": "./web/test" }
+  ]
+}

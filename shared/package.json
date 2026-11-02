@@ -1,0 +1,16 @@
+{
+  "name": "@supermail/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/api.ts",
+      "development": "./src/api.ts",
+      "default": "./dist/api.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b"
+  }
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1120" />
+    <title>Offline · SuperMail</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #ffffff;
+        --fg: #0f172a;
+        --muted: #475569;
+        --accent: #2563eb;
+        --on-accent: #ffffff;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color-scheme: dark;
+          --bg: #0b1120;
+          --fg: #e2e8f0;
+          --muted: #94a3b8;
+          --accent: #60a5fa;
+          --on-accent: #0b1120;
+        }
+      }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px;
+        box-sizing: border-box;
+        text-align: center;
+        background: var(--bg);
+        color: var(--fg);
+        font: 15px/22px system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+      h1 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 26px;
+        font-weight: 600;
+      }
+      p {
+        margin: 0;
+        color: var(--muted);
+      }
+      button {
+        margin-top: 8px;
+        min-height: 48px;
+        padding: 0 24px;
+        border: 0;
+        border-radius: 6px;
+        background: var(--accent);
+        color: var(--on-accent);
+        font: inherit;
+        font-weight: 500;
+        touch-action: manipulation;
+      }
+      button:active {
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>You're offline</h1>
+    <p>SuperMail needs a connection to show your mail.</p>
+    <button type="button" onclick="location.reload()">Retry</button>
+  </body>
+</html>

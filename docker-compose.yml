@@ -1,0 +1,42 @@
+# SuperMail with plain Docker, no Home Assistant needed.
+#
+#   1. Put the Google OAuth client JSON at ./client_secret.json (docs/google-cloud-setup.md).
+#   2. Create a .env file next to this one (it is gitignored):
+#        SUPERMAIL_OWNER_EMAIL=you@gmail.com
+#        SUPERMAIL_PUBLIC_URL=https://mail.example.com
+#   3. docker compose up -d --build
+#
+# The port is published on 127.0.0.1 only: put an HTTPS reverse proxy in front of it (README.md, "HTTPS").
+# For a quick try on this machine, leave SUPERMAIL_PUBLIC_URL unset and open http://localhost:8787.
+services:
+  supermail:
+    build:
+      context: .
+      dockerfile: addon/super_mail/Dockerfile
+    image: supermail:local
+    restart: unless-stopped
+    environment:
+      SUPERMAIL_OWNER_EMAIL: ${SUPERMAIL_OWNER_EMAIL:-}
+      SUPERMAIL_PUBLIC_URL: ${SUPERMAIL_PUBLIC_URL:-http://localhost:8787}
+      # Secure cookies follow the public URL (on for https://); set true or false to override.
+      SUPERMAIL_SECURE_COOKIES: ${SUPERMAIL_SECURE_COOKIES:-}
+      SUPERMAIL_HOST: 0.0.0.0
+      SUPERMAIL_PORT: "8787"
+      SUPERMAIL_DATA_DIR: /data
+      SUPERMAIL_CLIENT_FILE: /config/client_secret.json
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      # The index, body cache, logs and secret.key (which encrypts the refresh tokens). Back it up
+      # without secret.key; after a restore, each account needs one "Reconnect".
+      - supermail-data:/data
+      - ${SUPERMAIL_CLIENT_FILE_HOST:-./client_secret.json}:/config/client_secret.json:ro
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8787/privacy').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+
+volumes:
+  supermail-data:

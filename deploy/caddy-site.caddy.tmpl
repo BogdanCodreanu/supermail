@@ -1,0 +1,5 @@
+# SuperMail site block: append it to your Caddyfile (or a file it imports) and reload Caddy.
+# Leave your existing site blocks as they are.
+${SUPERMAIL_DOMAIN} {
+${CADDY_TLS_BLOCK}	reverse_proxy 127.0.0.1:${SUPERMAIL_PORT}
+}

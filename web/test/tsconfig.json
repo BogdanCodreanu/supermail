@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "types": ["vite/client", "@testing-library/jest-dom/vitest"],
+    "rootDir": "..",
+    "outDir": "../.tsbuild/test",
+    "emitDeclarationOnly": true
+  },
+  "include": ["./**/*.ts", "./**/*.tsx", "../vitest.config.ts", "../tailwind.config.ts"],
+  "references": [{ "path": ".." }, { "path": "../../shared" }]
+}

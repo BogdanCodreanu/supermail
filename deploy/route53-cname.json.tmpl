@@ -1,0 +1,14 @@
+{
+  "Comment": "SuperMail: ${SUPERMAIL_DOMAIN} CNAME to ${DNS_TARGET}. MX records are not touched.",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "${SUPERMAIL_DOMAIN}.",
+        "Type": "CNAME",
+        "TTL": 300,
+        "ResourceRecords": [{ "Value": "${DNS_TARGET}" }]
+      }
+    }
+  ]
+}

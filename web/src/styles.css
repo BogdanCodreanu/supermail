@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Flat, Inter, dense (spec §4.6, mockup option B). Light and dark through these variables. */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #475569;
+  --faint: #64748b; /* 4.76:1 on --bg: dates, counts, hints */
+  --line: #e2e8f0;
+  --panel: #f8fafc;
+  --hover: #f1f5f9;
+  --sel: #eff6ff;
+  --accent: #2563eb;
+  --on-accent: #ffffff;
+  --danger: #b91c1c;
+  --danger-bg: #fef2f2;
+  --warn-bg: #fffbeb;
+  --ring: #2563eb;
+  --kbd: #ffffff;
+  --kbd-border: #cbd5e1;
+  --kbd-fg: #334155;
+  --toast-lift: 80px; /* the phone's toasts clear the 56px compose button */
+}
+
+/* A screen with a 56px bottom bar: the toasts clear that instead. */
+:root:has([data-bottom-bar]) {
+  --toast-lift: 64px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0b1120;
+    --fg: #e2e8f0;
+    --muted: #94a3b8;
+    --faint: #8b9bb4; /* 7.2:1 on --bg */
+    --line: #1e293b;
+    --panel: #0f172a;
+    --hover: #1e293b;
+    --sel: #172554;
+    --accent: #60a5fa;
+    --on-accent: #0b1120; /* dark text on the light accent: 7.6:1 */
+    --danger: #f87171;
+    --danger-bg: #2a1215;
+    --warn-bg: #2a2110;
+    --ring: #93c5fd;
+    --kbd: #1e293b;
+    --kbd-border: #334155;
+    --kbd-fg: #cbd5e1;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-bg font-sans text-sm text-fg antialiased;
+}
+
+/* A tap acts at once, with no double-tap zoom in the way. Pinch zoom stays. In the base layer so that a utility can
+   override it: outside it, this beats `touch-pan-y` on the swipeable rows, and the browser takes every swipe away. */
+@layer base {
+  a,
+  button,
+  input,
+  label,
+  select,
+  textarea,
+  [role='option'],
+  [role='radio'] {
+    touch-action: manipulation;
+  }
+}
+
+/* One visible focus ring for every keyboard-focused control (mouse clicks don't show it). */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

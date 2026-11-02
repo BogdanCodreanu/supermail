@@ -1,0 +1,15 @@
+# Used by BuildKit for `-f addon/super_mail/Dockerfile` (it looks for <Dockerfile>.dockerignore).
+# For the Home Assistant add-on, deploy/deploy.sh places the same file as .dockerignore at the add-on root.
+**/.git
+**/node_modules
+**/dist
+**/.data
+**/.superpowers
+**/*.db
+**/*.db-*
+**/.env*
+**/*.tsbuildinfo
+**/.tsbuild
+**/client_secret*.json
+**/*.pem
+**/deploy/deploy.env

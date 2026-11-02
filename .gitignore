@@ -1,0 +1,14 @@
+.superpowers/
+node_modules/
+dist/
+*.db*
+.env*
+.data/
+*.tsbuildinfo
+.tsbuild/
+
+# Secrets and personal deploy settings: never committed.
+client_secret*.json
+*.pem
+deploy/deploy.env
+deploy/out/

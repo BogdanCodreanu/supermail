@@ -1,0 +1,47 @@
+/* What's behind a swiped row. White on the light colours is at least 4.5:1, and so is the dark text on the dark ones. */
+:root {
+  --swipe-done: #15803d;
+  --on-swipe-done: #ffffff;
+  --swipe-snooze: #b45309;
+  --on-swipe-snooze: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --swipe-done: #4ade80;
+    --on-swipe-done: #052e16;
+    --swipe-snooze: #fbbf24;
+    --on-swipe-snooze: #451a03;
+  }
+}
+
+.swipe-layer {
+  opacity: 0;
+}
+
+.swipe-reveal[data-side='right'] [data-testid='reveal-right'],
+.swipe-reveal[data-side='left'] [data-testid='reveal-left'] {
+  opacity: 0.72;
+}
+
+.swipe-reveal[data-armed='true'][data-side='right'] [data-testid='reveal-right'],
+.swipe-reveal[data-armed='true'][data-side='left'] [data-testid='reveal-left'] {
+  opacity: 1;
+}
+
+.swipe-icon {
+  transition: transform 150ms ease-out;
+}
+
+.swipe-reveal[data-armed='true'] .swipe-icon {
+  transform: scale(1.2);
+}
+
+/* A sideways flick on the app bar or the pills must not become the browser's own back navigation and leave the app.
+   Android's edge gesture belongs to the system, not the page, so it still works. */
+@media (max-width: 767px) {
+  html,
+  body {
+    overscroll-behavior-x: none;
+  }
+}
